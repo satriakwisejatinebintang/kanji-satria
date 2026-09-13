@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanji N4 Master Pro - Flashcard & Mini Games</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        sakura: {
+                            50: '#fdf2f4',
+                            100: '#fce7eb',
+                            500: '#e11d48',
+                            600: '#be123c',
+                            700: '#9f1239'
+                        },
+                        indigoTheme: {
+                            50: '#eef2ff',
+                            600: '#4f46e5',
+                            700: '#4338ca'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sakura-500 to-rose-400 flex items-center justify-center text-white shadow-md shadow-sakura-500/20">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight bg-gradient-to-r from-sakura-600 to-indigo-600 bg-clip-text text-transparent">Kanji N4 Master Pro</h1>
+                    <p class="text-xs text-slate-400 font-medium">Professional Graphic & Flashcard Studio</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-1">
+                <button onclick="switchTab('home')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-sakura-600 hover:bg-sakura-50 transition"><i class="fa-solid fa-house mr-1.5"></i> Beranda</button>
+                <button onclick="switchTab('flashcard')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-sakura-600 hover:bg-sakura-50 transition"><i class="fa-solid fa-clone mr-1.5"></i> Flashcard</button>
+                <button onclick="switchTab('list')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-sakura-600 hover:bg-sakura-50 transition"><i class="fa-solid fa-list mr-1.5"></i> Daftar Kanji</button>
+                <button onclick="switchTab('mnemonics')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-sakura-600 hover:bg-sakura-50 transition"><i class="fa-solid fa-lightbulb mr-1.5"></i> Ilustrasi & Tips</button>
+                <button onclick="switchTab('quiz')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-sakura-600 hover:bg-sakura-50 transition"><i class="fa-solid fa-circle-question mr-1.5"></i> Kuis Tebak</button>
+                <button onclick="switchTab('game')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-sakura-600 hover:bg-sakura-50 transition"><i class="fa-solid fa-gamepad mr-1.5"></i> Mini Game</button>
+            </nav>
+            <div class="flex items-center">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> 379 Kosakata N4
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- TAB 1: HOME (Dashboard Menu Utama) -->
+        <section id="tab-home" class="tab-content space-y-8">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-rose-500 via-pink-500 to-indigo-600 text-white p-8 sm:p-12 shadow-xl shadow-rose-500/10">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
+                    <i class="fa-solid fa-torii-gate"></i>
+                </div>
+                <div class="relative z-10 max-w-2xl">
+                    <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-bold uppercase tracking-wider mb-4 inline-block">Edisi Profesional N4</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">Kuasai 379 Kosakata & Kanji N4 dengan Mudah & Menyenangkan</h2>
+                    <p class="text-rose-100 text-sm sm:text-base mb-6 leading-relaxed">Dirancang layaknya aplikasi grafis profesional interaktif untuk membantu daya ingat visual, latihan kilat, dan ujian uji kompetensi JLPT N4 Anda.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="switchTab('flashcard')" class="px-6 py-3 bg-white text-rose-600 font-bold rounded-xl shadow-lg hover:bg-rose-50 transition transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-play mr-2"></i> Mulai Flashcard
+                        </button>
+                        <button onclick="switchTab('mnemonics')" class="px-6 py-3 bg-white/10 border border-white/30 text-white font-bold rounded-xl backdrop-blur-md hover:bg-white/20 transition">
+                            <i class="fa-solid fa-lightbulb mr-2"></i> Lihat Ilustrasi
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Access Grid -->
+            <div>
+                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center"><i class="fa-solid fa-compass text-sakura-500 mr-2"></i> Menu Pintasan Studi</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Card 1 -->
+                    <div onclick="switchTab('flashcard')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-rose-50 text-sakura-500 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-clone"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg mb-1">Flashcard Interaktif</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Balik kartu untuk menghafal arti dan pelafalan (Yomkata) dengan cepat.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div onclick="switchTab('list')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-list-ul"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg mb-1">Daftar Kanji Lengkap</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Katalog lengkap 379 kosakata beserta pencarian instan berdasarkan nomor/arti.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div onclick="switchTab('mnemonics')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-paintbrush"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg mb-1">Menu Ilustrasi Khusus</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Ilustrasi visual mnemonik untuk mengaitkan bentuk kanji dengan maknanya.</p>
+                    </div>
+                    <!-- Card 4 -->
+                    <div onclick="switchTab('quiz')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-circle-question"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg mb-1">Kuis Tebak Kosakata</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Uji pemahaman dan tingkat keakuratan hafalan Anda dengan pilihan ganda.</p>
+                    </div>
+                    <!-- Card 5 -->
+                    <div onclick="switchTab('game')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg mb-1">Mini Game Cepat</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">Game interaktif mencocokkan arti untuk mengasah ketangkasan otak.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: FLASHCARD -->
+        <section id="tab-flashcard" class="tab-content hidden space-y-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between bg-white p-4 rounded-2xl border border-slate-200 shadow-sm gap-4">
+                <div>
+                    <h3 class="font-bold text-lg text-slate-800">Mode Flashcard Interaktif</h3>
+                    <p class="text-xs text-slate-500">Klik kartu untuk membalik antara Depan (Nomor/Kosakata) dan Belakang (Arti).</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs font-semibold text-slate-600">Loncat ke:</span>
+                    <input type="number" id="fc-jump-input" min="1" max="379" value="1" class="w-20 px-3 py-1.5 border border-slate-300 rounded-lg text-sm text-center focus:outline-none focus:ring-2 focus:ring-sakura-500">
+                    <button onclick="jumpFlashcard()" class="px-4 py-1.5 bg-sakura-500 text-white text-sm font-semibold rounded-lg hover:bg-sakura-600 transition">Go</button>
+                </div>
+            </div>
+
+            <!-- Flashcard Display Area -->
+            <div class="flex flex-col items-center justify-center py-6">
+                <div id="flashcard-container" class="w-full max-w-md h-96 perspective-1000 cursor-pointer" onclick="flipCard()">
+                    <div id="flashcard-inner" class="relative w-full h-full duration-500 transform-style-3d shadow-xl rounded-3xl">
+                        <!-- Front Face -->
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-rose-50 to-pink-50 border-2 border-rose-200 rounded-3xl p-8 flex flex-col justify-between backface-hidden">
+                            <div class="flex justify-between items-center">
+                                <span id="fc-front-num" class="px-3 py-1 bg-sakura-500 text-white rounded-full text-xs font-bold">001</span>
+                                <i class="fa-solid fa-sakura text-sakura-500 text-xl animate-pulse"></i>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-xs uppercase font-bold tracking-widest text-rose-400 mb-2 block">KOSAKATA N4</span>
+                                <h4 id="fc-front-title" class="text-3xl font-extrabold text-slate-800 mb-2">bertemu</h4>
+                                <p class="text-xs text-slate-400 italic">Klik untuk melihat Yomkata & Arti</p>
+                            </div>
+                            <div class="text-center text-xs text-slate-400">
+                                <i class="fa-solid fa-rotate mr-1"></i> Ketuk kartu untuk membalik
+                            </div>
+                        </div>
+                        <!-- Back Face -->
+                        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-indigo-50 to-blue-50 border-2 border-indigo-200 rounded-3xl p-8 flex flex-col justify-between backface-hidden rotate-y-180">
+                            <div class="flex justify-between items-center">
+                                <span id="fc-back-num" class="px-3 py-1 bg-indigo-600 text-white rounded-full text-xs font-bold">001</span>
+                                <i class="fa-solid fa-book-open text-indigo-600 text-xl"></i>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-xs uppercase font-bold tracking-widest text-indigo-500 mb-2 block">ARTI & PELAFALAN</span>
+                                <h4 id="fc-back-meaning" class="text-3xl font-extrabold text-slate-800 mb-3">bertemu</h4>
+                                <p id="fc-back-desc" class="text-sm text-slate-600 font-medium">Kosakata Dasar N4 (Flip on Long Edge)</p>
+                            </div>
+                            <div class="text-center text-xs text-indigo-400">
+                                <i class="fa-solid fa-rotate mr-1"></i> Ketuk kartu untuk kembali
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex items-center space-x-4 mt-8">
+                    <button onclick="prevCard()" class="px-5 py-2.5 bg-white border border-slate-300 rounded-xl font-bold text-sm text-slate-700 hover:bg-slate-100 transition shadow-sm flex items-center">
+                        <i class="fa-solid fa-arrow-left mr-2"></i> Sebelumnya
+                    </button>
+                    <span id="fc-counter" class="text-sm font-bold text-slate-600">1 / 379</span>
+                    <button onclick="nextCard()" class="px-5 py-2.5 bg-sakura-500 text-white rounded-xl font-bold text-sm hover:bg-sakura-600 transition shadow-md shadow-sakura-500/20 flex items-center">
+                        Berikutnya <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: DAFTAR KANJI (LIST) -->
+        <section id="tab-list" class="tab-content hidden space-y-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between bg-white p-4 rounded-2xl border border-slate-200 shadow-sm gap-4">
+                <div>
+                    <h3 class="font-bold text-lg text-slate-800">Daftar Katalog Kanji & Kosakata N4</h3>
+                    <p class="text-xs text-slate-500">Total 379 data kosakata lengkap dari dokumen Anda.</p>
+                </div>
+                <div class="w-full sm:w-72">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                            <i class="fa-solid fa-search"></i>
+                        </span>
+                        <input type="text" id="search-input" oninput="filterKanjiList()" placeholder="Cari kosakata / nomor..." class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sakura-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid List -->
+            <div id="kanji-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </section>
+
+        <!-- TAB 4: MNEMONICS & ILUSTRASI -->
+        <section id="tab-mnemonics" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center space-x-3 mb-2">
+                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-paintbrush"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-800">Menu Ilustrasi & Tips Menghafal (Mnemonik)</h3>
+                        <p class="text-xs text-slate-500">Gunakan pendekatan visual dan asosiasi cerita untuk menanamkan kosakata ke memori jangka panjang.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="mnemonics-grid">
+                <!-- Populated via JS -->
+            </div>
+        </section>
+
+        <!-- TAB 5: KUIS TEBAK-TEBAKAN -->
+        <section id="tab-quiz" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm max-w-2xl mx-auto">
+                <div id="quiz-start-screen" class="text-center py-8 space-y-4">
+                    <div class="w-16 h-16 bg-rose-50 text-sakura-500 rounded-2xl flex items-center justify-center text-3xl mx-auto shadow-inner">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-800">Uji Hafalan Kosakata N4</h3>
+                    <p class="text-sm text-slate-500 max-w-md mx-auto">Tantang diri Anda dengan pertanyaan pilihan ganda interaktif berdasarkan database kosakata N4.</p>
+                    <button onclick="startQuiz()" class="px-6 py-3 bg-sakura-500 text-white font-bold rounded-xl shadow-lg hover:bg-sakura-600 transition">
+                        Mulai Kuis Sekarang
+                    </button>
+                </div>
+
+                <div id="quiz-question-screen" class="hidden space-y-6">
+                    <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                        <span id="quiz-progress" class="text-xs font-bold text-sakura-600 bg-rose-50 px-3 py-1 rounded-full">Pertanyaan 1 dari 10</span>
+                        <span id="quiz-score" class="text-xs font-bold text-slate-600">Skor: 0</span>
+                    </div>
+                    <div>
+   
